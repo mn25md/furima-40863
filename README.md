@@ -1,24 +1,59 @@
-# README
+# Database Design
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Users Table (users)
+| Column             | Type   | Options                  |
+|--------------------|--------|--------------------------|
+| nickname           | string | null: false              |
+| email              | string | null: false, unique: true|
+| password           | string | null: false              |
+| birth_day          | date   | null: false              |
+| first_name         | string | null: false              |
+| last_name          | string | null: false              |
+| first_name_kana    | string | null: false              |
+| last_name_kana     | string | null: false              |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :orders
 
-* Ruby version
+## Items Table (items)
+| Column              | Type       | Options                        |
+|---------------------|------------|--------------------------------|
+| product_name        | string     | null: false                    |
+| product_description | text       | null: false                    |
+| category_id         | integer    | null: false                    |
+| condition_id        | integer    | null: false                    |
+| contribution_id     | integer    | null: false                    |
+| prefecture_id       | integer    | null: false                    |
+| day_id              | integer    | null: false                    |
+| price               | integer    | null: false                    |
+| user_id             | references | null: false, foreign_key: true |
 
-* System dependencies
+### Association
+- belongs_to :user
+- has_one :order
 
-* Configuration
+## Orders Table (orders)
+| Column     | Type       | Options                        |
+|------------|------------|--------------------------------|
+| user_id    | references | null: false, foreign_key: true |
+| item_id    | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
-* Database initialization
+## Addresses Table (addresses)
+| Column         | Type       | Options                        |
+|----------------|------------|--------------------------------|
+| post_code      | string     | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| municipalities | string     | null: false                    |
+| address        | string     | null: false                    |
+| building_name  | string     |                                |
+| phone_number   | string     | null: false                    |
+| order_id       | references | null: false, foreign_key: true |
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :order
