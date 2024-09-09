@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @items = Item.all
+    # @items = Item.all
   end
 
   def new
@@ -14,12 +14,12 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice:
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id])
   end
 
   private
