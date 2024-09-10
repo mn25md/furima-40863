@@ -14,25 +14,3 @@ h1{
   margin: 0 auto;
   margin-bottom: 20px;
 }
-
-.article{
-  height:200px;
-  background-color:lightgray;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border: 1px solid #fff;
-  padding: 20px;
-}
-
-.article-genre{
-  font-size: 16px;
-  border: 1px solid;
-  padding: 5px;
-  background-color: lightblue;
-}
-
-.article-title{
-  font-size: 20px;
-  font-weight: bold;
-}
