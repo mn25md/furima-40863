@@ -1,0 +1,16 @@
+h1{
+  text-align: center;
+}
+
+.post{
+  display: block;
+  width: 150px;
+  padding: 10px;
+  border: 1px solid white;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
