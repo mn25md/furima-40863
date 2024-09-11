@@ -1,7 +1,5 @@
 <%= render "shared/header" %>
 <div class='main'>
-
-  <%# 画面上部の「人生を変えるフリマアプリ」帯部分 %>
   <div class='title-contents'>
     <h2 class='service-title'>
       人生を変えるフリマアプリ
@@ -120,10 +118,10 @@
       <% if @items.present? %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to item_path(item) do %>
+            <%= link_to "#" do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
-                <% if item.sold_out? %>
+                <%# if item.sold_out? %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
@@ -132,7 +130,7 @@
               <div class='item-info'>
                 <h3 class='item-name'><%= item.name %></h3>
                 <div class='item-price'>
-                  <span><%= item.price %>円<br><%= '配送料負担' %></span>
+                  <span><%= item.price %>円<br><%= item.shipping_cost.name %></span>
                   <div class='star-btn'>
                     <%= image_tag "star.png", class:"star-icon" %>
                     <span class='star-count'>0</span>
@@ -143,8 +141,6 @@
           </li>
         <% end %>
       <% else %>
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <%# 商品がある場合は表示されないようにしましょう %>
       <li class='list'>
         <%= link_to '#' do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -163,11 +159,8 @@
         <% end %>
       </li>
       <% end %>
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
     </ul>
   </div>
-  <%# /商品一覧 %>
 </div>
 <%= link_to new_item_path, class: 'purchase-btn' do %>
   <span class='purchase-btn-text'>出品する</span>
