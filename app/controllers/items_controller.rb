@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:edit, :update, :show]
   before_action :redirect_if_sold, only: [:edit]
-  before_action :redirect_unless_owner, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update]
   def new
     @item = Item.new
   end
@@ -20,8 +20,8 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
-      redirect_to @item, notice: '商品情報が更新されました。'
+    if current_user.update(user_params)
+      redirect_to root_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -30,10 +30,13 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find_by(id: params[:id])
+    return unless @item.nil?
+
+    redirect_to root_path, alert: '指定された商品は存在しません。'
   end
 
-  def redirect_unless_owner
+  def correct_user
     return if current_user.id == @item.user_id
 
     redirect_to root_path, alert: 'この商品の編集権限がありません。'
