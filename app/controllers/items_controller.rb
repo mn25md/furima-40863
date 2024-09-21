@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_item, only: [:edit, :update, :show]
-  before_action :redirect_if_sold, only: [:edit]
+  # before_action :redirect_if_sold, only: [:edit]
   before_action :correct_user, only: [:edit, :update]
   def new
     @item = Item.new
@@ -45,11 +45,5 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :description, :category_id, :condition_id, :shipping_cost_id, :prefecture_id,
                                  :shipping_day_id, :price, :image).merge(user_id: current_user.id)
-  end
-
-  def redirect_if_sold
-    return unless @item.sold_out?
-
-    redirect_to root_path, alert: 'この商品はすでに売却済みです。'
   end
 end
