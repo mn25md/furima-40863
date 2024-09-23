@@ -1,8 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_item, only: [:edit, :update, :show]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
   # before_action :redirect_if_sold, only: [:edit]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def new
     @item = Item.new
   end
@@ -27,10 +28,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if @item.destroy
+      redirect_to root_path, notice: '商品が削除されました。'
+    else
+      redirect_to @item, alert: '商品の削除に失敗しました。'
+    end
+  end
+
   private
 
   def set_item
-    @item = Item.find_by(id: params[:id])
+    @item = Item.find(params[:id])
     return unless @item.nil?
 
     redirect_to root_path, alert: '指定された商品は存在しません。'
