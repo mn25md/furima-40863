@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find_by(id: params[:id])
+    @item = Item.find(params[:id])
     return unless @item.nil?
 
     redirect_to root_path, alert: '指定された商品は存在しません。'
