@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_cost
   belongs_to :prefecture
   belongs_to :shipping_day
+  has_one :order
 
   has_one_attached :image
 
@@ -17,5 +18,11 @@ class Item < ApplicationRecord
   validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_cost_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :description, presence: { message: "can't be blank" }
+
   validates :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
+
+  def sold_out?
+    order.present?
+  end
 end

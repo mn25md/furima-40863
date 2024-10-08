@@ -1,8 +1,12 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:edit, :update, :show, :destroy]
-  # before_action :redirect_if_sold, only: [:edit]
+  before_action :redirect_if_sold, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+
+  def index
+    @items = Item.all.order(created_at: :desc)
+  end
 
   def new
     @item = Item.new
@@ -29,6 +33,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @item = Item.find(params[:id])
     if @item.destroy
       redirect_to root_path, notice: '商品が削除されました。'
     else
@@ -40,8 +45,7 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-    return unless @item.nil?
-
+  rescue ActiveRecord::RecordNotFound
     redirect_to root_path, alert: '指定された商品は存在しません。'
   end
 
@@ -49,6 +53,12 @@ class ItemsController < ApplicationController
     return if current_user.id == @item.user_id
 
     redirect_to root_path, alert: 'この商品の編集権限がありません。'
+  end
+
+  def redirect_if_sold
+    return unless @item.sold_out?
+
+    redirect_to root_path, alert: '売却済み商品の編集や削除はできません。'
   end
 
   def item_params
