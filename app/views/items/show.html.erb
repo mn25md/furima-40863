@@ -29,7 +29,7 @@
         <%= link_to "削除", item_path(@item), data: { turbo_method: :delete}, class: "item-destroy" %>
       <% elsif current_user.id != @item.user_id && !@item.sold_out? %>
         <%= form_with model: @order_address, url: item_orders_path(@item), id: 'charge-form', local: true, data: { turbo: false } do |f| %>
-        <%= link_to "購入画面に進む", item_orders_path(@item), class: "item-red-btn" %>
+        <%= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class:"item-red-btn"%>
       <% end %>
     <% end %>
   </div>
