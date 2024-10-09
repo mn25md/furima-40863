@@ -1,13 +1,13 @@
 <%= include_gon %>
-<%= render "shared/header" %>
-<div class='main'>
-  <div class='title-contents'>
-    <h2 class='service-title'>
-      人生を変えるフリマアプリ
-    </h2>
-    <p class='service-explain'>
-      FURIMAはだれでもかんたんに出品・購入できる
-    </p>
+ <%= render "shared/header" %>
+ <div class='main'>
+   <div class='title-contents'>
+     <h2 class='service-title'>
+       人生を変えるフリマアプリ
+     </h2>
+     <p class='service-explain'>
+       FURIMAはだれでもかんたんに出品・購入できる
+    < /p>
     <p class='service-explain'>
       フリマアプリです
     </p>
@@ -16,7 +16,6 @@
       <%= link_to image_tag("google-play.png", class:"google-btn"), "#" %>
     </div>
   </div>
-
   <div class='select-reason-contents'>
     <h2 class='title'>
       FURIMAが選ばれる3つの理由
@@ -118,29 +117,25 @@
       <% if @items.present? %>
         <% @items.each do |item| %>
           <li class="list">
-            <#div class="item-card">
-              <%= link_to item_path(item) do %>
+            <%= link_to item_path(item) do %>
               <div class='item-img-content'>
-                <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-image" %>
-                <h2 class="item-name"><%= item.name %></h2>
-                <p class="item-price">¥<%= item.price %></p>
+                <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-image", width: "200", height: "200" %>
                 <% if item.sold_out? %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
                 <% end %>
-              <% end %>
-            </div>
+              </div>
+            <% end %> 
             <div class='item-info'>
               <h3 class='item-name'><%= item.name %></h3>
               <div class='item-price'>
-                <span><%= item.price %>円<br>
-                  <% if item.shipping_cost.present? %>
-                    <%= item.shipping_cost.name %>
-                  <%else%>
-                    配送料の情報がありません
-                  <%end%>
-                </span>
+                <span>¥<%= item.price %></span><br>
+                <% if item.shipping_cost.present? %>
+                  <span><%= item.shipping_cost.name %></span>
+                <% else %>
+                  <span>配送料の情報がありません</span>
+                <% end %>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
@@ -150,23 +145,23 @@
           </li>
         <% end %>
       <% else %>
-          <li class='list'>
-            <%= link_to '#' do %>
-              <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
-              <div class='item-info'>
-                <h3 class='item-name'>
+        <li class='list'>
+          <%= link_to '#' do %>
+            <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
+            <div class='item-info'>
+              <h3 class='item-name'>
                 商品を出品してね！
               </h3>
-                <div class='item-price'>
-                  <span>99999999円<br>(税込み)</span>
-                  <div class='star-btn'>
-                    <%= image_tag "star.png", class:"star-icon" %>
-                    <span class='star-count'>0</span>
-                  </div>
+              <div class='item-price'>
+                <span>99999999円<br>(税込み)</span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'></span>
                 </div>
               </div>
-            <% end %>
-          </li>
+            </div>
+          <% end %>
+        </li>
       <% end %>
     </ul>
   </div>
