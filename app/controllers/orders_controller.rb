@@ -10,17 +10,13 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_params)
-    puts params
-    puts "Order params: #{order_params}"
     if @order_address.valid?
       pay_item
       @order_address.save
       redirect_to root_path, notice: '購入が完了しました。'
     else
-      puts @order_address.errors.full_messages
       gon.public_key = ENV.fetch('PAYJP_PUBLIC_KEY', nil)
       render :index, status: :unprocessable_entity
-      puts @order_address.errors.full_messages
     end
   end
 

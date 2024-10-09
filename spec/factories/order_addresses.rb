@@ -7,12 +7,5 @@ FactoryBot.define do
     building { '柳ビル103' }
     phone_number { '09012345678' }
     token { 'tok_abcdefghijk00000000000000000' }
-
-    after(:build) do |order_address|
-      user = FactoryBot.create(:user)
-      item = FactoryBot.create(:item, user:)
-      order_address.user_id = user.id
-      order_address.item_id = item.id
-    end
   end
 end
