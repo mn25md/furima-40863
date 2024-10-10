@@ -11,16 +11,16 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  validates :image, presence: { message: "can't be blank" }
   validates :name, presence: { message: "can't be blank" }
+  validates :description, presence: { message: "can't be blank" }
   validates :price, presence: { message: "can't be blank" },
                     numericality: { only_integer: true, message: 'is not a number' }
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :shipping_cost_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :condition_id, numericality: { other_than: 1, message: "Sales status can't be blank" }
+  validates :shipping_cost_id, numericality: { other_than: 1, message: "Shipping fee status can't be blank" }
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :description, presence: { message: "can't be blank" }
-
-  validates :shipping_day_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :shipping_day_id, numericality: { other_than: 1, message: "Scheduled delivery can't be blank" }
 
   def sold_out?
     order.present?
