@@ -79,11 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
     t.integer "condition_id"
     t.integer "shipping_cost_id"
     t.integer "prefecture_id"
-    t.integer "price"
-    t.bigint "user_id", null: false
     t.integer "shipping_day_id"
     t.boolean "is_sold", default: false
-    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "orders", charset: "utf8", force: :cascade do |t|
@@ -131,7 +128,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "orders"
-  add_foreign_key "items", "users"
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
 end
