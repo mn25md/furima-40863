@@ -1,6 +1,6 @@
 class AddColumnsToItems < ActiveRecord::Migration[7.0]
   def change
-    add_column :items, :name, :string
+    add_column :items, :string
     add_column :items, :description, :text
     add_column :items, :category_id, :integer
     add_column :items, :condition_id, :integer
