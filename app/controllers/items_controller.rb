@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = Item.new(item_params) # ここで user_id のマージを削除しました
     if @item.save
       redirect_to @item, notice: '商品が作成されました。'
     else

@@ -7,7 +7,6 @@
       </h2>
       <div class="item-img-content">
         <%= image_tag @item.image.attached? ? url_for(@item.image) : "item-sample.png", class: "item-box-img" %>
-
         <% if @item.sold_out? %>
           <div class="sold-out">
             <span>Sold Out!!</span>
@@ -16,7 +15,7 @@
       </div>
       <div class="item-price-box">
         <span class="item-price">
-          ¥ <%= @item.price %>
+          ¥ <%= @item.price.present? ? @item.price : '金額が設定されていません' %>
         </span>
         <span class="item-postage">
           
@@ -42,7 +41,15 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
+            <td class="detail-value">
+              <% if @item.user.present? %>
           <td class="detail-value"><%= @item.user.nickname %></td>
+              <% else %>
+      ユーザーが存在しません
+    <% end %>
+  </td>
+</tr>
+
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>

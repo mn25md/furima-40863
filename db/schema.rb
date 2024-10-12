@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_11_133034) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -82,6 +82,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_11_133034) do
     t.integer "shipping_day_id"
     t.boolean "is_sold", default: false
     t.integer "price"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "orders", charset: "utf8", force: :cascade do |t|
