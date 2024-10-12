@@ -116,27 +116,26 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-      <% if @items.present? %>
-        <% @items.each do |item| %>
-          <li class="list">
-            <%= link_to item_path(item) do %>
-              <div class='item-img-content'>
-                <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-img" %>
-                <% if item.sold_out? %>
-                  <div class='sold-out'>
-                    <span>Sold Out!!</span>
-                  </div>
-                <% end %>
-              </div>
+     <% if @items.present? %>
+      <% @items.each do |item| %>
+      <li class="list">
+        <%= link_to item_path(item) do %>
+        <div class='item-img-content'>
+          <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-img" %>
+        <% if item.sold_out? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+        <% end %>
             <% end %> 
-            <div class='item-info'>
-              <h3 class='item-name'>
-                <%= item.product_name %>
-                </h3>
-              <div class='item-price'>
-                <span><%= item.price %>円</span><br>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= item.product_name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= item.price %>円<br>
                 <% if item.shipping_cost.present? %>
-                  <span><%= item.shipping_cost.name %></span>
+                <%= item.shipping_cost.name %></span>
                 <% else %>
                   <span>配送料の情報がありません</span>
                 <% end %>
@@ -147,7 +146,7 @@
               </div>
             </div>
             <% end %>
-          <% else %>
+          
           </li>
           <li class='list'>
             <%= link_to '#' do %>
