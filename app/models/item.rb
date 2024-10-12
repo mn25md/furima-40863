@@ -12,8 +12,8 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   validates :image, presence: { message: "can't be blank" }
-  validates :name, presence: { message: "can't be blank" }
-  validates :description, presence: { message: "can't be blank" }
+  validates :product_name, presence: { message: "can't be blank" }
+  validates :product_description, presence: { message: "can't be blank" }
   validates :price, presence: { message: "can't be blank" },
                     numericality: { only_integer: true, message: 'is not a number' }
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }

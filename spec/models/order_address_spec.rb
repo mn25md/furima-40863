@@ -21,13 +21,13 @@ RSpec.describe OrderAddress, type: :model do
 
     context '配送先の住所情報が保存できない場合' do
       it '郵便番号が空では保存できない' do
-        @order_address.postal_code = ''
+        @order_address.post_code = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Postal code can't be blank")
       end
 
       it '郵便番号が「3桁ハイフン4桁」でない場合は保存できない' do
-        @order_address.postal_code = '1234567'
+        @order_address.post_code = '1234567'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Postal code is invalid. Enter it as follows (e.g. 123-4567)')
       end

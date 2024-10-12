@@ -28,7 +28,7 @@
           <span class='reason-list-blue-text'>3分</span>
           ですぐに出品
         </h3>
-        <p class='reason-list-description'>
+        <p class='reason-list-product_description'>
           スマホで入力するだけで簡単に出品できる！
         </p>
       </li>
@@ -39,7 +39,7 @@
           <span class='reason-list-blue-text'>シンプル</span>
           で使いやすい
         </h3>
-        <p class='reason-list-description'>
+        <p class='reason-list-product_description'>
           めんどくさい入力は必要なく、検索も購入もスムーズ！
         </p>
       </li>
@@ -50,7 +50,7 @@
           手数料
           <span class='reason-list-blue-text'>業界最安</span>
         </h3>
-        <p class='reason-list-description'>
+        <p class='reason-list-product_description'>
           10%でお得に出品&購入！
         </p>
       </li>
@@ -86,7 +86,7 @@
         <h3 class='feature-list-text'>
           簡単に売り買いできる
         </h3>
-        <p class='feature-list-description'>
+        <p class='feature-list-product_description'>
           スマホひとつで、いつでもどこでも簡単に出品・購入が可能！
         </p>
       </li>
@@ -95,7 +95,7 @@
         <h3 class='feature-list-text'>
           売上金は即日振込みに対応
         </h3>
-        <p class='feature-list-description'>
+        <p class='feature-list-product_description'>
           午前9時までに振込を依頼いただければ、翌日に指定の口座に入金いたします。
         </p>
       </li>
@@ -104,7 +104,7 @@
         <h3 class='feature-list-text'>
           様々な支払いに対応
         </h3>
-        <p class='feature-list-description'>
+        <p class='feature-list-product_description'>
           お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります。
         </p>
       </li>
@@ -128,7 +128,7 @@
               </div>
             <% end %> 
             <div class='item-info'>
-              <h3 class='item-name'><%= item.name %></h3>
+              <h3 class='item-name'><%= item.product_name %></h3>
               <div class='item-price'>
                 <span>¥<%= item.price %></span><br>
                 <% if item.shipping_cost.present? %>
