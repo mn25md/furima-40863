@@ -40,24 +40,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
   end
 
   create_table "addresses", charset: "utf8", force: :cascade do |t|
-    t.string "postal_code", null: false
+    t.string "post_code", null: false
     t.integer "prefecture_id", null: false
     t.string "city", null: false
-    t.string "addresses", null: false
+    t.string "address", null: false
     t.string "building"
     t.string "phone_number", null: false
     t.bigint "order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_addresses_on_order_id"
-  end
-
-  create_table "articles", charset: "utf8", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "text", null: false
-    t.integer "genre_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "categories", charset: "utf8", force: :cascade do |t|
@@ -71,18 +63,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
   end
 
   create_table "items", charset: "utf8", force: :cascade do |t|
+    t.string "product_name", null: false
+    t.text "product_description", null: false
+    t.integer "category_id", null: false
+    t.integer "condition_id", null: false
+    t.integer "shipping_cost_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "shipping_day_id", null: false
+    t.integer "price", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.text "description"
-    t.integer "category_id"
-    t.integer "condition_id"
-    t.integer "shipping_cost_id"
-    t.integer "prefecture_id"
-    t.integer "shipping_day_id"
     t.boolean "is_sold", default: false
-    t.integer "price"
-    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -100,12 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "shipping_costs", charset: "utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "shipping_days", charset: "utf8", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -118,12 +106,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "nickname"
-    t.string "last_name"
-    t.string "first_name"
-    t.string "last_name_kana"
-    t.string "first_name_kana"
-    t.date "birth_date"
+    t.string "nickname", null: false
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.date "birth_date", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -131,6 +119,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_150325) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "orders"
+  add_foreign_key "items", "users"
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
 end

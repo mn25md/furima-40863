@@ -3,7 +3,7 @@
   <div class="item-show">
     <div class="item-box">
       <h2 class="name">
-        <%= @item.name %>
+        <%= @item.product_name %>
       </h2>
       <div class="item-img-content">
         <%= image_tag @item.image.attached? ? url_for(@item.image) : "item-sample.png", class: "item-box-img" %>
@@ -34,7 +34,7 @@
   </div>
 
     <div class="item-explain-box">
-      <span><%= @item.description %></span>
+      <span><%= @item.product_description %></span>
     </div>
 
     <table class="detail-table">
