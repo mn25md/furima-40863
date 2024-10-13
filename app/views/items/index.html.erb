@@ -116,20 +116,21 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-     <% if @items.any? %>
-      <% @items.each do |item| %>
-      <li class="list">
-        <%= link_to item_path(item) do %>
-        <div class='item-img-content'>
-          <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-img" %>
-        <% if item.sold_out? %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
-        <% end %>
+      <% if @items.present? %>
+        <% @items.each do |item| %>
+          <li class="list">
+            <%= link_to item_path(item) do %>
+              <div class='item-img-content'>
+                <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-img" %>
+                <% if item.sold_out? %>
+                  <div class='sold-out'>
+                    <span>Sold Out!!</span>
+                  </div>
+                <% end %>
+              </div>
             <% end %> 
-        <div class='item-info'>
-          <h3 class='item-name'>
+            <div class='item-info'>
+              <h3 class='item-name'>
             <%= item.product_name %>
           </h3>
           <div class='item-price'>
@@ -145,12 +146,14 @@
                 </div>
               </div>
             </div>
-            <% end %>
-          
           </li>
-          <li class='list'>
-            <%= link_to '#' do %>
+        <% end %>
+      <% else %>
+        <li class='list'>
+          <%= link_to '#' do %>
+          <div class="item-img-content">
             <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
+          </div>
             <div class='item-info'>
               <h3 class='item-name'>
                 商品を出品してね！
@@ -163,11 +166,11 @@
                 </div>
               </div>
             </div>
-            <% end %>
-          </li>
-        <%end %>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
-</div>
+  </div>
 <%= link_to new_item_path, class: 'purchase-btn' do %>
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
