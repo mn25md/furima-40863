@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = current_user
     if @item.save
-      redirect_to @item, notice: '商品が作成されました。'
+      redirect_to root_path, notice: '商品が作成されました。'
     else
       render :new, status: :unprocessable_entity
     end
