@@ -1,24 +1,24 @@
 window.addEventListener('turbo:load', calculatePrice);
 window.addEventListener('turbo:render', calculatePrice);
+
 function calculatePrice() {
   const priceInput = document.getElementById("item-price");
   const taxOutput = document.getElementById("add-tax-price");
   const profitOutput = document.getElementById("profit");
 
-  if (!priceInput) return;
+  if (priceInput) {
+    priceInput.addEventListener('input', () => {
+      const inputValue = priceInput.value;
 
-  priceInput.addEventListener('input', () => {
-    const price = parseInt(priceInput.value, 10);
-
-    if (isNaN(price) || price < 300 || price > 9999999) {
-      taxOutput.textContent = '';
-      profitOutput.textContent = '';
-    } else {
-      const tax = Math.floor(price * 0.1);
-      const profit = price - tax;
-
-      taxOutput.textContent = tax;
-      profitOutput.textContent = profit;
-    }
-  });
+      if (inputValue) {
+        const tax = Math.floor(inputValue * 0.1); // 販売手数料(10%)
+        const profit = inputValue - tax; // 販売利益
+        taxOutput.innerHTML = tax;
+        profitOutput.innerHTML = profit;
+      } else {
+        taxOutput.innerHTML = ''; // 入力が空の場合は手数料や利益をクリア
+        profitOutput.innerHTML = '';
+      }
+    });
+  }
 }
